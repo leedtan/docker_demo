@@ -4,4 +4,5 @@ RUN pip3 install flask gunicorn
 COPY setup.py .
 COPY dockerdemo ./dockerdemo
 RUN python3 setup.py install
-ENTRYPOINT [ "server" ]
+EXPOSE 5000
+ENTRYPOINT [ "gunicorn", "-b 0.0.0.0:5000", "dockerdemo.main:app" ]
